@@ -8,13 +8,19 @@ class Password_Test extends AnyFunSpec with Matchers {
     describe("determines proper length") {
       it("rejects passwords that are less than 6 characters") {
         val tooShort = "abcde"
-        val longEnough = "abcdef"
-        val evenLonger = "abcdefghi"
-        val containsNumber = "abcdef1"
+        val longEnough = "abcde1"
+        val evenLonger = "abcdefghi1"
         Password.isValid(tooShort) shouldBe false
-        Password.isValid(longEnough) shouldBe false
-        Password.isValid(evenLonger) shouldBe false
-        Password.isValie(containsNumber) shouldBe true
+        Password.isValid(longEnough) shouldBe true
+        Password.isValid(evenLonger) shouldBe true
+      }
+    }
+    describe("and determines proper composition"){
+      it("rejects passwords which don't contain a number") {
+        val doesntContainNumber = "abcdefgh"
+        val containsNumber = "abcd3223sks"
+        Password.isValid(doesntContainNumber) shouldBe false
+        Password.isValid(containsNumber) shouldBe true
       }
     }
   }
